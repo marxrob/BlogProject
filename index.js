@@ -34,7 +34,6 @@ app.get("/", (req, res) =>{
 
 app.get("/home", (req, res) =>{
     res.render("../views/index.ejs", {posts: posts});
-    console.log(req.params);
 })
 
 app.get("/createPost", (req, res) =>{
@@ -47,7 +46,6 @@ app.get("/about", (req, res) => {
 
 app.get("/post/:index", (req, res) => {
     const index = Number(req.params.index);
-    console.log(req.params);
 
     res.render("../views/post.ejs", posts[index]);
 });
@@ -57,13 +55,13 @@ app.listen(port, (req, resp) => {
 })
 
 // POSTS
-app.post("/post/:index", (req, res) => {
+app.post("/post/newPost", (req, res) => {
     posts.push({
         "author": req.body.author,
         "title": req.body.title,
         "text": req.body.text
     });
 
-    const index = Number(req.params.index);
-    res.render("../views/post.ejs", posts[index]);
+    const index = posts.length - 1;
+    res.redirect(`/post/${index}`);
 })
