@@ -17,7 +17,7 @@ header ul {
 }
 
 
-li, header p, li a {
+li, header p, header a{
     list-style: none;
     color: white;
     text-decoration: none;

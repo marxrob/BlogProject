@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs") %>
+
+<form action="/post/<%= posts.length %>" method="post">
+    <label for="author">Author: </label><br>
+    <input type="text" name="author"><br>
+    <label for="title">Title: </label><br>
+    <input type="text" name="title"><br>
+    <label for="text">Text: </label><br>
+    <textarea name="text" id=""></textarea><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<%- include("partials/footer.ejs") %>

@@ -8,11 +8,12 @@ import bodyParser from "body-parser";
 // TODO: 3.2 Create the common footer ✅
 // TODO: 3.3 Create the common style file ✅
 // TODO: 3.4 Create the home page file ✅
-// TODO: 4. Create the post page ❌
+// TODO: 4. Create the post page ✅
 // TODO: 4.1 Add the post page style ✅
-// TODO: 5. Create the add post logic ❌
-// TODO: 5.1 Add the post creating page style ❌
+// TODO: 5. Create the add post logic ✅
+// TODO: 5.1 Add the post creating page style ✅
 // TODO: 6. Connect home page to header and footer through .ejs ✅
+// TODO: 7. Additional styling ❌
 
 let posts = [
     {author: "Marques Silva",
@@ -21,11 +22,11 @@ let posts = [
     }
 ];
 
-
 const app = express();
 const port = 3000;
 const hi = "Hi!";
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.get("/", (req, res) =>{
     res.render("../views/index.ejs", {posts: posts});
@@ -33,10 +34,11 @@ app.get("/", (req, res) =>{
 
 app.get("/home", (req, res) =>{
     res.render("../views/index.ejs", {posts: posts});
+    console.log(req.params);
 })
 
 app.get("/createPost", (req, res) =>{
-    res.render("../views/createPost.ejs");
+    res.render("../views/createPost.ejs", {posts: posts});
 })
 
 app.get("/about", (req, res) => {
@@ -45,6 +47,7 @@ app.get("/about", (req, res) => {
 
 app.get("/post/:index", (req, res) => {
     const index = Number(req.params.index);
+    console.log(req.params);
 
     res.render("../views/post.ejs", posts[index]);
 });
@@ -54,3 +57,13 @@ app.listen(port, (req, resp) => {
 })
 
 // POSTS
+app.post("/post/:index", (req, res) => {
+    posts.push({
+        "author": req.body.author,
+        "title": req.body.title,
+        "text": req.body.text
+    });
+
+    const index = Number(req.params.index);
+    res.render("../views/post.ejs", posts[index]);
+})
