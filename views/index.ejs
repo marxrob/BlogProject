@@ -1,0 +1,31 @@
+<%- include('partials/header.ejs')  -%>
+
+    <main class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <% reviews.forEach((review) => { %>
+        <div class="card mb-3 mx-auto" style="max-width: 540px;" >
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://covers.openlibrary.org/b/olid/<%= review.olid %>-M.jpg" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= review.title %></h5>
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                                <%= review.bookTitle %>
+                            </small>
+                        </p>
+                        <p class="card-text"><%= review.text %></p>
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                                Posted <%= review.datpub %>
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </main>
+
+<%- include('partials/footer.ejs')  -%>
